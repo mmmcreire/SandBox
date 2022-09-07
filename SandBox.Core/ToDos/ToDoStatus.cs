@@ -1,9 +1,8 @@
-﻿namespace SandBox.Core.ToDos
+﻿namespace SandBox.Core.ToDos;
+
+public enum ToDoStatus
 {
-    public enum ToDoStatus
-    {
-        Created,
-        InProgress,
-        Done
-    }
+    Created,
+    InProgress,
+    Done
 }

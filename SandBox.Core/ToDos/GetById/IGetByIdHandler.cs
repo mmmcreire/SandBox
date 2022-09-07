@@ -1,7 +1,6 @@
-﻿namespace SandBox.Core.ToDos.GetById
+﻿namespace SandBox.Core.ToDos.GetById;
+
+public interface IGetByIdHandler
 {
-    public interface IGetByIdHandler
-    {
-        Task<GetByIdResult> Handle(Guid id);
-    }
+    Task<GetByIdResult> Handle(Guid id);
 }

@@ -1,7 +1,6 @@
-﻿namespace SandBox.Core.ToDos.Get
+﻿namespace SandBox.Core.ToDos.Get;
+
+public interface IGetToDosHandler
 {
-    public interface IGetToDosHandler
-    {
-        Task<List<GetToDosResult>> Handle();
-    }
+    Task<List<GetToDosResult>> Handle();
 }
