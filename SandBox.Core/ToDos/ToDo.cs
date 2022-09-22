@@ -6,6 +6,8 @@ public class ToDo
     public string Description { get; private set; }
     public ToDoStatus Status { get; private set; }
 
+    public ToDo() { }
+
     public ToDo(string description)
     {
         if(string.IsNullOrEmpty(description))

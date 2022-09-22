@@ -1,29 +1,30 @@
-﻿using SandBox.Core.Ports;
+﻿using Microsoft.EntityFrameworkCore;
+using SandBox.Core.Ports;
 using SandBox.Core.ToDos;
+using SandBox.Infra.Database;
 
 namespace SandBox.Infra.Repository;
 
 public class ToDoRepository : IToDoRepository
 {
-    //private List<ToDo> todos = new List<ToDo>(); => before .net 6
-    private static List<ToDo> ToDos = new() //after .net 6 we do not have to type new List<ToDo>() anymore, just new()
+    private readonly DatabaseContext _context;
+    private readonly DbSet<ToDo> _todos;
+
+    public ToDoRepository(DatabaseContext context)
     {
-        new ToDo("Todo 1"),
-        new ToDo("Todo 2"),
-        new ToDo("Todo 3"),
-        new ToDo("Todo 4"),
-        new ToDo("Todo 5"),
-    };
+        _context = context;
+        _todos = context.Set<ToDo>();
+    }
 
-    public Task<List<ToDo>> Get() =>
-        Task.FromResult(ToDos);
+    public async Task<List<ToDo>> Get() =>
+        await _todos.ToListAsync();
 
-    public Task<ToDo> GetById(Guid id) =>
-        Task.FromResult(ToDos.FirstOrDefault(e => e.Id == id));
+    public async Task<ToDo> GetById(Guid id) =>
+        await _todos.FirstOrDefaultAsync(e => e.Id == id);
 
-    public Task Save(ToDo todo)
+    public async Task Save(ToDo todo)
     {
-        ToDos.Add(todo);
-        return Task.CompletedTask;
+        await _todos.AddAsync(todo);
+        await _context.SaveChangesAsync();
     }
 }
