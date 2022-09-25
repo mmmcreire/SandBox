@@ -25,13 +25,19 @@ public class ToDoController : ControllerBase
         IGetToDosHandler getToDosHandler,
         IGetByIdHandler getByIdHandler,
         ICreateToDoHandler createToDoHandler,
-        IDeleteTodoHandler deleteTodoHandler
+        IDeleteTodoHandler deleteTodoHandler,
+        IMarkAsDoneHandler markAsDoneHandler,
+        IPutInProgressHandler putInProgressHandler,
+        IUpdateDescriptionHandler updateDescriptionHandler
         )
     {
         _getToDosHandler = getToDosHandler;
         _getByIdHandler = getByIdHandler;
         _createToDoHandler = createToDoHandler;
         _deleteTodoHandler = deleteTodoHandler;
+        _markAsDoneHandler = markAsDoneHandler;
+        _putInProgressHandler = putInProgressHandler;
+        _updateDescriptionHandler = updateDescriptionHandler;
 
     }
 
@@ -56,30 +62,19 @@ public class ToDoController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id)
-    {
-        var result = await _deleteTodoHandler.Handle(id);
-        return Ok(result);
-    }
+    public async Task<IActionResult> Delete([FromRoute] Guid id) =>
+        Ok(await _deleteTodoHandler.Handle(id));
+
 
     [HttpPut("MarkAsDone")]
-    public async Task<IActionResult> MarkAsDone([FromRoute] Guid id)
-    {
-        var result = await _markAsDoneHandler.Handle(id);
-        return Ok(result);
-    }
+    public async Task<IActionResult> MarkAsDone([FromRoute] Guid id) =>
+        Ok(await _markAsDoneHandler.Handle(id));
 
     [HttpPut("PutInProgress")]
-    public async Task<IActionResult> PutInProgress([FromRoute] Guid id)
-    {
-        var result = await _putInProgressHandler.Handle(id);
-        return Ok(result);
-    }
+    public async Task<IActionResult> PutInProgress([FromRoute] Guid id) =>
+        Ok(await _putInProgressHandler.Handle(id));
 
     [HttpPut("UpdateDescription")]
-    public async Task<IActionResult> UpdateDescription([FromRoute] Guid id, [FromBody] string description)
-    {
-        var result = await _updateDescriptionHandler.Handle(id, description);
-        return Ok(result);
-    }
+    public async Task<IActionResult> UpdateDescription([FromRoute] Guid id, [FromBody] string description) =>
+        Ok(await _updateDescriptionHandler.Handle(id, description));
 }
