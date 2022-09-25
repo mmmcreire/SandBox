@@ -12,7 +12,7 @@ using SandBox.Infra.Database;
 namespace SandBox.Infra.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220922185004_Initial")]
+    [Migration("20220923193950_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

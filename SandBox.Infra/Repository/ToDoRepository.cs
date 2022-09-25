@@ -27,4 +27,30 @@ public class ToDoRepository : IToDoRepository
         await _todos.AddAsync(todo);
         await _context.SaveChangesAsync();
     }
+
+    public async Task Delete(Guid id)
+    {
+        _todos.Remove(_todos.FirstOrDefault(e => e.Id == id));
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task MarkAsDone(ToDo todo)
+    {
+        var updatedTodo = _todos.FirstOrDefault(e => e.Id == todo.Id);
+        updatedTodo.MarkAsDone();
+        await _context.SaveChangesAsync();
+    }
+    public async Task PutInProgress(ToDo todo)
+    {
+        var updatedTodo = _todos.FirstOrDefault(e => e.Id == todo.Id);
+        updatedTodo.PutInProgress();
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateDescription(ToDo todo)
+    {
+        var updatedTodo = _todos.FirstOrDefault(e => e.Id == todo.Id);
+        updatedTodo.UpdateDescription(todo.Description);
+        await _context.SaveChangesAsync();
+    }
 }

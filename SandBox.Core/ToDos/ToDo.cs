@@ -17,4 +17,32 @@ public class ToDo
         Description = description;
         Status = ToDoStatus.Created;
     }
+
+    public void DeleteTodo(Guid id)
+    {
+
+    }
+
+    public void PutInProgress()
+    {
+        if(Status == ToDoStatus.Done)
+            throw new ArgumentException("Todo is already Done");
+        Status = ToDoStatus.InProgress;
+    }
+
+    public void MarkAsDone()
+    {
+        if(Status == ToDoStatus.Created)
+            throw new ArgumentException("Status should be In Progress before change to Done");
+        Status = ToDoStatus.Done;
+    }
+
+    public string UpdateDescription(string description)
+    {
+        if(string.IsNullOrEmpty(description))
+            throw new ArgumentException("Description cannot be null or empty");
+
+        Description = description;
+        return Description;
+    }
 }
