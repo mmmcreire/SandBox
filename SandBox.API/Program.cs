@@ -1,11 +1,15 @@
 using SandBox.Infra.IoC;
+using SandBox.Infra.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Inject();
+
+
+var settings = builder.Configuration.Get<AppSettings>();
+builder.Services.Inject(settings);
 
 var app = builder.Build();
 

@@ -2,5 +2,5 @@
 
 public interface ICreateToDoHandler
 {
-    Task<Tuple<CreateToDoResult, List<string>>> Handle(CreateToDoCommand command);
+    Task<CreateToDoResult> Handle(CreateToDoCommand command);
 }

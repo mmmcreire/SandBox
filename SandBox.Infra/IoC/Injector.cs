@@ -13,12 +13,14 @@ using SandBox.Core.ToDos.PutInProgress;
 using SandBox.Core.ToDos.UpdateDescription;
 using SandBox.Infra.Database;
 using SandBox.Infra.Repository;
+using SandBox.Infra.Settings;
+using SandBox.SharedKernel.DomainValidation;
 
 namespace SandBox.Infra.IoC;
 
 public static class Injector
 {
-    public static void Inject(this IServiceCollection services) =>
+    public static void Inject(this IServiceCollection services, AppSettings settings) =>
         services
             .AddScoped<IToDoRepository, ToDoRepository>()
             .AddScoped<ICreateToDoHandler, CreateToDoHandler>()
@@ -28,9 +30,10 @@ public static class Injector
             .AddScoped<IUpdateDescriptionHandler, UpdateDescriptionHandler>()
             .AddScoped<IPutInProgressHandler, PutInProgressHandler>()
             .AddScoped<IMarkAsDoneHandler, MarkAsDoneHandler>()
+            .AddScoped<IDomainValidator, DomainValidator>()
             .AddValidatorsFromAssemblyContaining<CreateToDoValidator>()
             .AddDbContext<DatabaseContext>(e =>
-                e.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=Todos;User Id=postgres;Password=123321")
+                e.UseNpgsql(settings.ConnectionString)
                     .ConfigureWarnings(x => x.Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning))
                     .LogTo(
                         Console.WriteLine,

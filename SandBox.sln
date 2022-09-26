@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Services", "0.Services", "{5454BB5E-90B1-4C76-812C-AA8BB846B816}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services", "1 - Services", "{5454BB5E-90B1-4C76-812C-AA8BB846B816}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Core", "1.Core", "{08772659-1A36-4776-B8A9-B5E8304543BB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Core", "2 - Core", "{08772659-1A36-4776-B8A9-B5E8304543BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Infra", "2.Infra", "{2D0FE8DC-7FC7-4D1E-9421-3C6D2F88619E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{2D0FE8DC-7FC7-4D1E-9421-3C6D2F88619E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandBox.Core", "SandBox.Core\SandBox.Core.csproj", "{79F6F92A-B003-4F5E-AA17-851443280E50}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SandBox.Infra", "SandBox.Infra\SandBox.Infra.csproj", "{CB0C9916-B5C0-4BEF-8173-15E9303F05B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox.API", "SandBox.API\SandBox.API.csproj", "{D33B9951-4C6D-464F-8993-C5A922AD53B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - SharedKernel", "4 - SharedKernel", "{C2BE6F2D-7D90-4C68-B96C-259E98E3479B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox.SharedKernel", "SandBox.SharedKernel\SandBox.SharedKernel.csproj", "{1F0F63CC-DDB8-48F3-8618-73E15B86232E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{D33B9951-4C6D-464F-8993-C5A922AD53B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D33B9951-4C6D-464F-8993-C5A922AD53B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D33B9951-4C6D-464F-8993-C5A922AD53B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0F63CC-DDB8-48F3-8618-73E15B86232E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0F63CC-DDB8-48F3-8618-73E15B86232E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0F63CC-DDB8-48F3-8618-73E15B86232E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0F63CC-DDB8-48F3-8618-73E15B86232E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{79F6F92A-B003-4F5E-AA17-851443280E50} = {08772659-1A36-4776-B8A9-B5E8304543BB}
 		{CB0C9916-B5C0-4BEF-8173-15E9303F05B3} = {2D0FE8DC-7FC7-4D1E-9421-3C6D2F88619E}
 		{D33B9951-4C6D-464F-8993-C5A922AD53B3} = {5454BB5E-90B1-4C76-812C-AA8BB846B816}
+		{1F0F63CC-DDB8-48F3-8618-73E15B86232E} = {C2BE6F2D-7D90-4C68-B96C-259E98E3479B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DDD50B1D-3209-4113-9D08-AB4462A2C597}
