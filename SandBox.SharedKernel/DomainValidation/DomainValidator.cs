@@ -9,23 +9,25 @@ public class DomainValidator : IDomainValidator
 
     public void AddFailValidations(List<Fail> fails) =>
         _fails.AddRange(fails);
-    
-    public bool HasFailValidation() => 
+
+    public bool HasFailValidation() =>
         _fails.Any(e => e.Type == FailType.Validation);
 
     public Dictionary<string, List<string>> GetFailValidations() =>
         _fails.Where(e => e.Type == FailType.Validation)
             .GroupBy(e => e.Field)
             .ToDictionary(
-                key => key.Key, 
+                key => key.Key,
                 values => values
                     .Select(e => e.Description)
                     .ToList());
 
-    public bool HasNotFound() => 
+    public bool HasNotFound() =>
         _fails.Any(e => e.Type == FailType.NotFound);
-    
+
     public string GetNotFoundValidation() =>
         _fails.First(e => e.Type == FailType.NotFound).Description;
-    
+
+    public void ClearValidations() =>
+        _fails.Clear();
 }

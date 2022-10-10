@@ -8,4 +8,5 @@ public interface IDomainValidator
     Dictionary<string, List<string>> GetFailValidations();
     bool HasNotFound();
     string GetNotFoundValidation();
+    void ClearValidations();
 }

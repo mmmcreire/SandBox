@@ -6,7 +6,7 @@ public class ToDo
     public string Description { get; private set; }
     public ToDoStatus Status { get; private set; }
 
-    public ToDo() { }
+    private ToDo() { }
 
     public ToDo(string description)
     {
@@ -22,7 +22,7 @@ public class ToDo
     {
         if(Status == ToDoStatus.Done)
             throw new ArgumentException("Todo is already Done");
-        
+
         Status = ToDoStatus.InProgress;
     }
 
