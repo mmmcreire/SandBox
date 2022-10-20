@@ -25,27 +25,27 @@ public class UpdateDescriptionHandler : IUpdateDescriptionHandler
 	{
 		var entity = await _repository.GetById(command.Id);
 
-		if (entity == null)
+		if(entity == null)
 		{
-			_domainValidator.AddNotFound($"Todo with id {command.Id} not founded!");
+			_domainValidator.AddNotFound($"Todo with id {command.Id} not found!");
 			return null;
 		}
-		
+
 		var validation = await _validator.ValidateAsync(command);
 
-		if (!validation.IsValid)
+		if(!validation.IsValid)
 		{
 			var fails = validation.Errors
 				.Select(e => new Fail(e.ErrorMessage, FailType.Validation, e.PropertyName))
 				.ToList();
-			
+
 			_domainValidator.AddFailValidations(fails);
 			return null;
 		}
-		
+
 		entity.UpdateDescription(command.Description);
 		await _repository.Update(entity);
-		
+
 		return new UpdateDescriptionResult(entity.Id, entity.Description, entity.Status);
 	}
 }

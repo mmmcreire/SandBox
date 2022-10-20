@@ -23,10 +23,10 @@ public class GetByIdHandler : IGetByIdHandler
 
         if(todo is null)
         {
-            _domainValidator.AddNotFound($"Todo with id {id} not founded");
+            _domainValidator.AddNotFound($"Todo with id {id} not found");
             return null;
         }
-        
+
         return new GetByIdResult(todo.Description, todo.Status);
     }
 }

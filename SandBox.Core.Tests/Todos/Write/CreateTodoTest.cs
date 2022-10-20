@@ -10,7 +10,7 @@ public class CreateTodoTest : BaseTest
     { }
 
     [Fact]
-    public async Task Should_Add_Fail_Validation_If_Description_Is_To_Less_Than_Two_Characters_Long()
+    public async Task Should_Add_Fail_Validation_If_Description_Is_Less_Than_Two_Characters_Long()
     {
         var description = "aa";
         var command = new CreateToDoCommand(description);
@@ -35,7 +35,7 @@ public class CreateTodoTest : BaseTest
     [Fact]
     public async Task Should_Save_Todo()
     {
-        var description = "aaa";
+        var description = "Test Description";
         var command = new CreateToDoCommand(description);
 
         var result = await CreateToDoHandler.Handle(command);

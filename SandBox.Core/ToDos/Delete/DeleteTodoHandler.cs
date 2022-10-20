@@ -23,10 +23,10 @@ public class DeleteTodoHandler : IDeleteTodoHandler
 
         if(todo is null)
         {
-            _domainValidator.AddNotFound($"Todo with id {id} not founded");
+            _domainValidator.AddNotFound($"Todo with id {id} not found");
             return null;
         }
-        
+
         await _repository.Delete(todo);
         return null;
     }

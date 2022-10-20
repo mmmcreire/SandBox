@@ -20,28 +20,28 @@ public class MarkAsDoneHandler : IMarkAsDoneHandler
     public async Task<MarkAsDoneResult> Handle(Guid id)
     {
         var todo = await _repository.GetById(id);
-        
+
         if(todo is null)
         {
-            _domainValidator.AddNotFound($"Todo with id {id} not founded");
+            _domainValidator.AddNotFound($"Todo with id {id} not found");
             return null;
         }
 
-        if (todo.Status == ToDoStatus.Created)
+        if(todo.Status == ToDoStatus.Created)
         {
             var fails = new List<Fail>
             {
                 new(
-                    "Cannot mark todo as done if is not in progress", 
-                    FailType.Validation, 
+                    "Cannot mark todo as done if is not in progress",
+                    FailType.Validation,
                     "status"
                 )
             };
-            
+
             _domainValidator.AddFailValidations(fails);
             return null;
         }
-        
+
         todo.MarkAsDone();
         await _repository.Update(todo);
         return new MarkAsDoneResult(todo.Id, todo.Description, todo.Status);

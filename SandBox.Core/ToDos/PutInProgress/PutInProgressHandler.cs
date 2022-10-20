@@ -20,28 +20,28 @@ public class PutInProgressHandler : IPutInProgressHandler
     public async Task<PutInProgressResult> Handle(Guid id)
     {
         var todo = await _repository.GetById(id);
-        
+
         if(todo is null)
         {
-            _domainValidator.AddNotFound($"Todo with id {id} not founded");
+            _domainValidator.AddNotFound($"Todo with id {id} not found");
             return null;
         }
 
-        if (todo.Status == ToDoStatus.Done)
+        if(todo.Status == ToDoStatus.Done)
         {
             var fails = new List<Fail>
             {
                 new(
-                    "Cannot put todo in progress it his already done!", 
-                    FailType.Validation, 
+                    "Cannot put todo in progress it his already done!",
+                    FailType.Validation,
                     "status"
                 )
             };
-            
+
             _domainValidator.AddFailValidations(fails);
             return null;
         }
-        
+
         todo.PutInProgress();
         await _repository.Update(todo);
 
