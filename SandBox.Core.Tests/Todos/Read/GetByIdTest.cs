@@ -1,5 +1,4 @@
 ﻿using SandBox.Core.Tests.Common;
-using SandBox.Core.ToDos.Create;
 
 namespace SandBox.Core.Tests.Todos.Read;
 
@@ -7,13 +6,6 @@ public class GetByIdTest : BaseTest
 {
     public GetByIdTest(Fixture fixture) : base(fixture)
     {
-    }
-
-    private async Task<CreateToDoResult> createNewTodo()
-    {
-        var command = new CreateToDoCommand("TodoTest");
-        var todo = await CreateToDoHandler.Handle(command);
-        return todo;
     }
 
     [Fact]
@@ -30,8 +22,8 @@ public class GetByIdTest : BaseTest
     [Fact]
     public async Task Should_Get_One_Todo()
     {
-        var command = createNewTodo();
-        var result = await GetByIdHandler.Handle(command.Result.Id);
+        var entity = await TodoGenerator.CreateNewTodo();
+        var result = await GetByIdHandler.Handle(entity.Id);
 
         Assert.NotNull(result);
         Assert.False(DomainValidator.HasNotFound());
@@ -40,13 +32,12 @@ public class GetByIdTest : BaseTest
     [Fact]
     public async Task Should_Get_Correct_Todo()
     {
-        var command = createNewTodo();
+        var entity = await TodoGenerator.CreateNewTodo();
 
-        var result = await GetByIdHandler.Handle(command.Result.Id);
-        var descriptionResult = command.Result.Description;
+        var result = await GetByIdHandler.Handle(entity.Id);
 
         Assert.NotNull(result);
         Assert.False(DomainValidator.HasNotFound());
-        Assert.Equal("TodoTest", result.Description);
+        Assert.Equal("aaa", result.Description);
     }
 }

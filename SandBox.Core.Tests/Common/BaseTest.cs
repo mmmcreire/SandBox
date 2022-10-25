@@ -1,4 +1,5 @@
 ﻿using SandBox.Core.Ports;
+using SandBox.Core.Tests.Common.Generators;
 using SandBox.Core.ToDos.Create;
 using SandBox.Core.ToDos.Delete;
 using SandBox.Core.ToDos.Get;
@@ -22,6 +23,7 @@ public class BaseTest : IClassFixture<Fixture>
     protected readonly IDeleteTodoHandler DeleteTodoHandler;
     protected readonly IGetToDosHandler GetTodosHandler;
     protected readonly IGetByIdHandler GetByIdHandler;
+    protected readonly ITodoGenerator TodoGenerator;
 
     protected BaseTest(Fixture fixture)
     {
@@ -34,6 +36,7 @@ public class BaseTest : IClassFixture<Fixture>
         GetByIdHandler = fixture.Get<IGetByIdHandler>();
         DomainValidator = fixture.Get<IDomainValidator>();
         TodoRepository = fixture.Get<IToDoRepository>();
+        TodoGenerator = new TodoGenerator(TodoRepository);
         DomainValidator.ClearValidations();
 
         fixture.Get<DatabaseContext>().Database.EnsureDeleted();

@@ -1,5 +1,4 @@
 ﻿using SandBox.Core.Tests.Common;
-using SandBox.Core.ToDos.Create;
 
 namespace SandBox.Core.Tests.Todos.Write;
 
@@ -7,13 +6,6 @@ public class PutInProgressTest : BaseTest
 {
     public PutInProgressTest(Fixture fixture) : base(fixture)
     {
-    }
-
-    private async Task<CreateToDoResult> createNewTodo()
-    {
-        var command = new CreateToDoCommand("TodoTest");
-        var todo = await CreateToDoHandler.Handle(command);
-        return todo;
     }
 
     [Fact]
@@ -30,11 +22,11 @@ public class PutInProgressTest : BaseTest
     [Fact]
     public async Task Should_Add_Fail_Validation_If_Todo_Is_Done()
     {
-        var newTodo = createNewTodo();
-        var inProgressTodo = await PutInProgressHandler.Handle(newTodo.Result.Id);
-        var doneTodo = await MarkAsDoneHandler.Handle(inProgressTodo.Id);
+        var entity = await TodoGenerator.CreateNewTodo();
+        await PutInProgressHandler.Handle(entity.Id);
+        await MarkAsDoneHandler.Handle(entity.Id);
 
-        var result = await PutInProgressHandler.Handle(doneTodo.Id);
+        var result = await PutInProgressHandler.Handle(entity.Id);
 
         Assert.Null(result);
         Assert.True(DomainValidator.HasFailValidation());
@@ -43,8 +35,8 @@ public class PutInProgressTest : BaseTest
     [Fact]
     public async Task Should_Put_Todo_In_Progress()
     {
-        var newTodo = createNewTodo();
-        var result = await PutInProgressHandler.Handle(newTodo.Result.Id);
+        var entity = await TodoGenerator.CreateNewTodo();
+        var result = await PutInProgressHandler.Handle(entity.Id);
 
         Assert.NotNull(result);
         Assert.False(DomainValidator.HasFailValidation());
